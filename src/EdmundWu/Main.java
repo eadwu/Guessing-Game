@@ -8,6 +8,8 @@ public class Main {
         Scanner stdin = new Scanner(System.in);
         int guesses = 0;
 
+        // TODO: Finish refactoring
+        // Properties are to be private
         Game mainframe = new EdmundWu.Game(stdin);
 
         int max = mainframe.max;
