@@ -1,5 +1,6 @@
 package EdmundWu;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Game {
@@ -16,9 +17,14 @@ public class Game {
 
     private void fetchGameType (Scanner stdin) {
         System.out.println("What type of game do you want to play, 0 - Player guesses, 1 - Computer guesses?");
-        int gameType = stdin.nextInt();
+        int gameType = 0;
 
-        if (gameType < 0 || gameType > 1) {
+        try {
+            gameType = stdin.nextInt();
+
+            if (gameType < 0 || gameType > 1)
+                throw new InputMismatchException();
+        } catch (InputMismatchException e) {
             System.out.println("Incorrect value for gameType, exiting...");
             System.exit(1);
         }
@@ -27,9 +33,14 @@ public class Game {
 
     private void fetchDifficulty (Scanner stdin) {
         System.out.println("What difficulty do you want to choose, 1-4, transforms range from [1, 10^n].");
-        int difficulty = stdin.nextInt();
+        int difficulty = 0;
 
-        if (difficulty < 1 || difficulty > 4) {
+        try {
+            difficulty = stdin.nextInt();
+
+            if (difficulty < 1 || difficulty > 4)
+                throw new InputMismatchException();
+        } catch (InputMismatchException e) {
             System.out.println("Incorrect value for difficulty, exiting...");
             System.exit(1);
         }
@@ -39,9 +50,14 @@ public class Game {
     private void getNumber (Scanner stdin) {
         if (gameType == 1)
             System.out.printf("Choose a number from [1, %d].\n", (int) max);
-        int number = gameType == 1 ? stdin.nextInt() : (int) (Math.random() * max + 1f);
+        int number = 0;
 
-        if (number < 1 || number > max) {
+        try {
+            number = gameType == 1 ? stdin.nextInt() : (int) (Math.random() * max + 1f);
+
+            if (number < 1 || number > max)
+                throw new InputMismatchException();
+        } catch (InputMismatchException e) {
             System.out.println("Invalid value for max, exiting...");
             System.exit(1);
         }

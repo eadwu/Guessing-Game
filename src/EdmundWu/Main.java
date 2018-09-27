@@ -1,5 +1,6 @@
 package EdmundWu;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -40,11 +41,16 @@ public class Main {
 
                 System.out.printf("The guessed number is %d, is the number higher than the guess (1) or lower than it (2)?\n",
                         currentGuess);
-                int highOrLow = stdin.nextInt();
+                int highOrLow = 2;
 
-                if (highOrLow < 1 || highOrLow > 2 ||
-                        (highOrLow == 1 && currentGuess > number) ||
-                        (highOrLow == 2 && currentGuess < number)) {
+                try {
+                    highOrLow = stdin.nextInt();
+
+                    if (highOrLow < 1 || highOrLow > 2 ||
+                            (highOrLow == 1 && currentGuess > number) ||
+                            (highOrLow == 2 && currentGuess < number))
+                        throw new InputMismatchException();
+                } catch (InputMismatchException e) {
                     System.out.println("Invalid value for highOrLow, exiting...");
                     System.exit(1);
                 }
